@@ -747,7 +747,7 @@ async fn start_reading<R: AsyncRead + Unpin>(
 }
 
 impl Session {
-    fn new(
+    pub fn new(
         target_window_size: u32,
         common: CommonSession<Arc<Config>>,
         receiver: Receiver<Msg>,
