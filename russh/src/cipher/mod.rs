@@ -36,7 +36,7 @@ use crate::Error;
 pub(crate) mod block;
 pub(crate) mod cbc;
 pub(crate) mod chacha20poly1305;
-pub(crate) mod clear;
+pub mod clear;
 pub(crate) mod gcm;
 
 use block::SshBlockCipher;
@@ -161,7 +161,7 @@ impl Debug for CipherPair {
     }
 }
 
-pub(crate) trait OpeningKey {
+pub trait OpeningKey {
     fn packet_length_to_read_for_block_length(&self) -> usize {
         4
     }
