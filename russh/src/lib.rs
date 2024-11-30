@@ -143,7 +143,7 @@ macro_rules! push_packet {
 mod channels;
 pub use channels::{Channel, ChannelMsg, ChannelStream};
 
-mod parsing;
+pub mod parsing;
 pub mod session;
 
 /// Server side of this library.

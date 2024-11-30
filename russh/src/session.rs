@@ -52,7 +52,7 @@ pub(crate) struct Encrypted {
     pub compress_buffer: CryptoVec,
 }
 
-pub(crate) struct CommonSession<Config> {
+pub struct CommonSession<Config> {
     pub auth_user: String,
     pub remote_sshid: Vec<u8>,
     pub config: Config,
@@ -495,7 +495,7 @@ impl Exchange {
 }
 
 #[derive(Debug)]
-pub(crate) enum Kex {
+pub enum Kex {
     /// Version number sent. `algo` and `sent` tell wether kexinit has
     /// been received, and sent, respectively.
     Init(KexInit),
@@ -512,7 +512,7 @@ pub(crate) enum Kex {
 }
 
 #[derive(Debug)]
-pub(crate) struct KexInit {
+pub struct KexInit {
     pub algo: Option<negotiation::Names>,
     pub exchange: Exchange,
     pub session_id: Option<CryptoVec>,
@@ -557,7 +557,7 @@ pub(crate) struct KexDh {
     pub session_id: Option<CryptoVec>,
 }
 
-pub(crate) struct KexDhDone {
+pub struct KexDhDone {
     pub exchange: Exchange,
     pub kex: Box<dyn KexAlgorithm + Send>,
     pub key: usize,
@@ -608,7 +608,7 @@ impl KexDhDone {
 }
 
 #[derive(Debug)]
-pub(crate) struct NewKeys {
+pub struct NewKeys {
     pub exchange: Exchange,
     pub names: negotiation::Names,
     pub kex: Box<dyn KexAlgorithm + Send>,
@@ -618,7 +618,7 @@ pub(crate) struct NewKeys {
     pub sent: bool,
 }
 
-pub(crate) enum GlobalRequestResponse {
+pub enum GlobalRequestResponse {
     /// request was for Keepalive, ignore result
     Keepalive,
     /// request was for TcpIpForward, sends Some(port) for success or None for failure
