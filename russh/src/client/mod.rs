@@ -72,9 +72,9 @@ use crate::{
     Limits, Sig,
 };
 
-mod encrypted;
-mod kex;
-mod session;
+pub mod encrypted;
+pub mod kex;
+pub mod session;
 
 /// Actual client session's state.
 ///
