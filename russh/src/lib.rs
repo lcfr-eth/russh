@@ -111,12 +111,12 @@ pub mod mac;
 /// Compression algorithm names
 pub mod compression;
 
-mod cert;
-mod key;
-mod msg;
-mod negotiation;
-mod ssh_read;
-mod sshbuffer;
+pub mod cert;
+pub mod key;
+pub mod msg;
+pub mod negotiation;
+pub mod ssh_read;
+pub mod sshbuffer;
 
 pub use negotiation::Preferred;
 
@@ -144,7 +144,7 @@ mod channels;
 pub use channels::{Channel, ChannelMsg, ChannelStream};
 
 mod parsing;
-mod session;
+pub mod session;
 
 /// Server side of this library.
 pub mod server;
