@@ -768,7 +768,7 @@ impl Session {
         }
     }
 
-    async fn run<H: Handler + Send, R: AsyncRead + AsyncWrite + Unpin + Send>(
+    pub async fn run<H: Handler + Send, R: AsyncRead + AsyncWrite + Unpin + Send>(
         mut self,
         stream: SshRead<R>,
         mut handler: H,
@@ -1154,7 +1154,7 @@ impl Session {
         }
     }
 
-    fn read_ssh_id(&mut self, sshid: &[u8]) -> Result<(), crate::Error> {
+    pub fn read_ssh_id(&mut self, sshid: &[u8]) -> Result<(), crate::Error> {
         // self.read_buffer.bytes += sshid.bytes_read + 2;
         let mut exchange = Exchange::new();
         exchange.server_id.extend(sshid);
