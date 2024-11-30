@@ -150,7 +150,7 @@ impl TryFrom<&str> for Name {
     }
 }
 
-pub(crate) struct CipherPair {
+pub struct CipherPair {
     pub local_to_remote: Box<dyn SealingKey + Send>,
     pub remote_to_local: Box<dyn OpeningKey + Send>,
 }
