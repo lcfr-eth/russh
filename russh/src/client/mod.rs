@@ -803,6 +803,7 @@ impl Session {
         }
     }
 
+    // lcfr debug! -> println!
     async fn run_inner<H: Handler + Send, R: AsyncRead + AsyncWrite + Unpin + Send>(
         &mut self,
         stream_read: SshRead<ReadHalf<R>>,
@@ -814,7 +815,9 @@ impl Session {
             Err(crate::Error::Disconnect.into());
         self.flush()?;
         if !self.common.write_buffer.buffer.is_empty() {
-            debug!("writing {:?} bytes", self.common.write_buffer.buffer.len());
+            //debug!("writing {:?} bytes", self.common.write_buffer.buffer.len());
+            println!("writing {:?} bytes", self.common.write_buffer.buffer.len());
+
             stream_write
                 .write_all(&self.common.write_buffer.buffer)
                 .await
@@ -887,7 +890,9 @@ impl Session {
                 }
                 () = &mut keepalive_timer => {
                     if self.common.config.keepalive_max != 0 && self.common.alive_timeouts > self.common.config.keepalive_max {
-                        debug!("Timeout, server not responding to keepalives");
+                        //debug!("Timeout, server not responding to keepalives");
+                        println!("Timeout, server not responding to keepalives");
+
                         return Err(crate::Error::KeepaliveTimeout.into());
                     }
                     self.common.alive_timeouts = self.common.alive_timeouts.saturating_add(1);
@@ -895,7 +900,8 @@ impl Session {
                     sent_keepalive = true;
                 }
                 () = &mut inactivity_timer => {
-                    debug!("timeout");
+                    //debug!("timeout");
+                    println!("timeout");
                     return Err(crate::Error::InactivityTimeout.into());
                 }
                 msg = self.receiver.recv(), if !self.is_rekeying() => {
@@ -933,10 +939,16 @@ impl Session {
 
             self.flush()?;
             if !self.common.write_buffer.buffer.is_empty() {
-                trace!(
+                //trace!(
+                //    "writing to stream: {:?} bytes",
+                //    self.common.write_buffer.buffer.len()
+                //);
+
+                println!(
                     "writing to stream: {:?} bytes",
                     self.common.write_buffer.buffer.len()
                 );
+
                 stream_write
                     .write_all(&self.common.write_buffer.buffer)
                     .await
