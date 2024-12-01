@@ -212,9 +212,9 @@ pub enum DisconnectReason<E: From<crate::Error> + Send> {
 /// Handle to a session, used to send messages to a client outside of
 /// the request/response cycle.
 pub struct Handle<H: Handler> {
-    sender: Sender<Msg>,
-    receiver: UnboundedReceiver<Reply>,
-    join: tokio::task::JoinHandle<Result<(), H::Error>>,
+    pub sender: Sender<Msg>,
+    pub receiver: UnboundedReceiver<Reply>,
+    pub join: tokio::task::JoinHandle<Result<(), H::Error>>,
 }
 
 impl<H: Handler> Drop for Handle<H> {
