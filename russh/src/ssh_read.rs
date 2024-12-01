@@ -114,21 +114,22 @@ impl<R: AsyncRead + Unpin> SshRead<R> {
         }
     }
 
+    // lcfr mod debug!() to println!()
     #[allow(clippy::unwrap_used)]
     pub async fn read_ssh_id(&mut self) -> Result<&[u8], Error> {
         let ssh_id = self.id.as_mut().unwrap();
         loop {
             let mut i = 0;
-            debug!("read_ssh_id: reading");
+            println!("read_ssh_id: reading");
 
             #[allow(clippy::indexing_slicing)] // length checked
             let n = AsyncReadExt::read(&mut self.r, &mut ssh_id.buf[ssh_id.total..]).await?;
-            debug!("read {:?}", n);
+            println!("read {:?}", n);
 
             ssh_id.total += n;
             #[allow(clippy::indexing_slicing)] // length checked
             {
-                debug!("{:?}", std::str::from_utf8(&ssh_id.buf[..ssh_id.total]));
+                println!("{:?}", std::str::from_utf8(&ssh_id.buf[..ssh_id.total]));
             }
             if n == 0 {
                 return Err(Error::Disconnect);
@@ -166,7 +167,7 @@ impl<R: AsyncRead + Unpin> SshRead<R> {
                 ssh_id.total = 0;
                 ssh_id.bytes_read = 0;
             }
-            debug!("bytes_read: {:?}", ssh_id.bytes_read);
+            println!("bytes_read: {:?}", ssh_id.bytes_read);
         }
     }
 }
