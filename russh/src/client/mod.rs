@@ -768,6 +768,7 @@ impl Session {
         }
     }
 
+    // lcfr trace! -> println!
     pub async fn run<H: Handler + Send, R: AsyncRead + AsyncWrite + Unpin + Send>(
         mut self,
         stream: SshRead<R>,
@@ -783,7 +784,7 @@ impl Session {
                 encrypted_signal,
             )
             .await;
-        trace!("disconnected");
+        println!("disconnected");
         self.receiver.close();
         self.inbound_channel_receiver.close();
         stream_write.shutdown().await.map_err(crate::Error::from)?;
