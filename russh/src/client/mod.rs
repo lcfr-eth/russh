@@ -876,7 +876,7 @@ impl Session {
                         &buffer.buffer[5..]
                     };
                     if !buf.is_empty() {
-                        println!("buf is empty! result will be Disconnect..")
+                        println!("buf is empty! result will be Disconnect..");
                         #[allow(clippy::indexing_slicing)] // length checked
                         if buf[0] == crate::msg::DISCONNECT {
                             result = self.process_disconnect(buf);
