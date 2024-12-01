@@ -178,7 +178,7 @@ pub trait OpeningKey {
     ) -> Result<&'a [u8], Error>;
 }
 
-pub(crate) trait SealingKey {
+pub trait SealingKey {
     fn padding_length(&self, plaintext: &[u8]) -> usize;
 
     fn fill_padding(&self, padding_out: &mut [u8]);

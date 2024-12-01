@@ -29,7 +29,7 @@ use crate::sshbuffer::SSHBuffer;
 use crate::{auth, cipher, mac, msg, negotiation, ChannelId, ChannelParams, Disconnect, Limits};
 
 #[derive(Debug)]
-pub(crate) struct Encrypted {
+pub struct Encrypted {
     pub state: EncryptedState,
 
     // It's always Some, except when we std::mem::replace it temporarily.
@@ -58,7 +58,7 @@ pub struct CommonSession<Config> {
     pub config: Config,
     pub encrypted: Option<Encrypted>,
     pub auth_method: Option<auth::Method>,
-    pub(crate) auth_attempts: usize,
+    pub auth_attempts: usize,
     pub write_buffer: SSHBuffer,
     pub kex: Option<Kex>,
     pub cipher: cipher::CipherPair,

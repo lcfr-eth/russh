@@ -104,7 +104,7 @@ impl Drop for Session {
 
 #[derive(Debug)]
 #[allow(clippy::large_enum_variant)]
-enum Reply {
+pub enum Reply {
     AuthSuccess,
     AuthFailure,
     ChannelOpenFailure,
